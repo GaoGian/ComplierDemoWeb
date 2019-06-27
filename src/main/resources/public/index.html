@@ -1,86 +1,159 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh-cn">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Compiler</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CompilerDemo</title>
+    <!--Bootstrap-->
+    <link href="Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/sidebar-menu/sidebar-menu.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-rtl.min.css" rel="stylesheet" />
+    <link href="Content/ace/css/ace-skins.min.css" rel="stylesheet" />
+    <link href="Content/toastr/toastr.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap/css/bootstrap-tab.css" rel="stylesheet"/>
 
-    <!-- Le styles -->
-    <link href="//cdn.staticfile.org/twitter-bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="Content/jquery-1.9.1.min.js"></script>
+    <script src="Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="Content/sidebar-menu/sidebar-menu.js"></script>
+    <script src="Content/bootstrap/js/bootstrap-tab.js"></script>
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-    <script src="//apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="http://www.runoob.com/favicon.ico">
-
-    <script type="text/javascript" src="//cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/jqueryui/1.10.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
-    <script type="text/javascript" src="//cdn.staticfile.org/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
-
-    <link href="https://www.runoob.com/try/bootstrap/layoutit/v3/layoutit.css" rel="stylesheet">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.runoob.com/try/bootstrap/layoutit/v3/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://www.runoob.com/try/bootstrap/layoutit/v3/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://www.runoob.com/try/bootstrap/layoutit/v3/apple-touch-icon-72-precomposed.png">
-
-    <script type="text/javascript" src="https://www.runoob.com/try/bootstrap/layoutit/v3/jquery.htmlClean.js"></script>
-    <script type="text/javascript" src="https://www.runoob.com/try/bootstrap/layoutit/v3/scripts.min.js"></script>
+    <style type="text/css">
+        iframe {
+            padding-top: 0px;
+            padding: 10px;
+            height: 800px !important;
+        }
+    </style>
 
 </head>
 <body>
-    <a href="SimpleJavaLexical.txt">1、词法文件</a>
-    <a href="SimpleJavaSyntax.txt">2、文法文件</a>
-    <a href="SyntaxItems.html">3、LR1项集图</a>
-    <a href="SyntaxPredictMap.html">4、LR1分析表</a>
-    <a href="SimpleJavaCompilerResult.txt">5、文法分析过程</a>
-    <a href="SyntaxTree.html">6、语法分析树</a>
-    <a href="SimpleJavaProgram.txt">7、目标程序及中间代码</a>
+<div class="navbar navbar-default" id="navbar">
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="icon-leaf"></i>
+                    CompilerDemo
+                </small>
+            </a>
+        </div>
+    </div>
 
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-md-12 column">
-                <div class="tabbable" id="tabs-536501">
-                    <ul class="nav nav-tabs">
-                        <li>
-                            <a href="#panel-639680" data-toggle="tab">首页</a>
-                        </li>
-                        <li class="active">
-                            <a href="#panel-208254" data-toggle="tab">Section 2</a>
-                        </li>
-                        <li>
-                            <a href="#panel-208255" data-toggle="tab">Section 3</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="panel-639680">
-                            <p>
-                                I'm in Section 1.
-                            </p>
-                        </div>
-                        <div class="tab-pane active" id="panel-208254">
-                            <div class="row clearfix">
-                                <div class="col-md-6 column">
-                                </div>
-                                <div class="col-md-6 column">
-                                </div>
+</div>
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+        <div class="sidebar" id="sidebar">
+            <ul class="nav nav-list" id="menu"></ul>
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="page-content">
+                <div class="row" style="margin-right:-20px;margin-left:-20px;">
+                    <div class="col-xs-12" style="padding-left:0px;padding-right:0px;">
+                        <ul class="nav-my-tab">
+                            <li class="middletab">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="active"><a href="#Index" role="tab" data-toggle="tab">
+                                        <i class="icon-home"></i>简介</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="rightforward"><a href="#">
+                                <i class="icon-forward"></i></a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="Index" style="height:100%">
+                                <iframe src="description.txt" frameBorder="0" width="1000" scrolling="no" height="1000"></iframe>
                             </div>
                         </div>
-                        <div class="tab-pane active" id="panel-208255">
-                            <div class="row clearfix">
-                                <div class="col-md-4 column">
-                                </div>
-                                <div class="col-md-4 column">
-                                </div>
-                                <div class="col-md-4 column">
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div>
+<script type="text/javascript">
+    //toastr.options.positionClass = 'toast-bottom-right';
+    $(function () {
+        $('#menu').sidebarMenu({
+            data: [{
+                id: '1',
+                text: '首页',
+                icon: 'icon-list',
+                url: ''
+            }, {
+                id: '2',
+                text: '编译内容',
+                icon: 'icon-list',
+                url: '',
+                menus: [{
+                    id: '21',
+                    text: '目标代码',
+                    icon: 'icon-glass',
+                    url: '/SimpleJavaProgram.txt'
+                }, {
+                    id: '22',
+                    text: '词法规则',
+                    icon: 'icon-glass',
+                    url: '/SimpleJavaLexical.txt'
+                }, {
+                    id: '23',
+                    text: '语法规则',
+                    icon: 'icon-glass',
+                    url: '/SimpleJavaSyntax.txt'
+                }]
+            }, {
+                id: '3',
+                text: '推导过程',
+                icon: 'icon-list',
+                url: '',
+                menus: [
+                    {
+                        id: '35',
+                        text: '中间代码',
+                        icon: 'icon-glass',
+                        url: '/SimpleJavaTargetCode.txt'
+                    },{
+                        id: '32',
+                        text: 'LR1分析表',
+                        icon: 'icon-glass',
+                        url: '/SyntaxPredictMap.html'
+                    }, {
+                        id: '33',
+                        text: '语法分析树',
+                        icon: 'icon-glass',
+                        url: '/SyntaxTree.html'
+                    },{
+                        id: '34',
+                        text: '项集推导过程',
+                        icon: 'icon-glass',
+                        url: '/SimpleJavaCompilerResult.txt'
+                    },{
+                        id: '31',
+                        text: 'LR1项集图',
+                        icon: 'icon-glass',
+                        url: '/SyntaxItems.html'
+                    }
+                ]
+            }]
+        });
+    });
+</script>
+<script src="Content/ace/js/ace-extra.min.js"></script>
+<script src="Content/ace/js/ace.min.js"></script>
 </body>
 </html>

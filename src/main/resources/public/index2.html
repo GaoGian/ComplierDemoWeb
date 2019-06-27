@@ -20,6 +20,14 @@
     <script src="Content/sidebar-menu/sidebar-menu.js"></script>
     <script src="Content/bootstrap/js/bootstrap-tab.js"></script>
 
+    <style type="text/css">
+        iframe {
+            padding-top: 0px;
+            padding: 10px;
+            height: 800px !important;
+        }
+    </style>
+
 </head>
 <body>
     <div class="navbar navbar-default" id="navbar">
@@ -51,9 +59,6 @@
                     <div class="row" style="margin-right:-20px;margin-left:-20px;">
                         <div class="col-xs-12" style="padding-left:0px;padding-right:0px;">
                             <ul class="nav-my-tab">
-                                <li class="leftbackward"><a href="#" >
-                                    <i class="icon-backward"></i></a>
-                                </li>
                                 <li class="middletab">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#Index" role="tab" data-toggle="tab">
@@ -118,7 +123,7 @@
                     url: '',
                     menus: [{
                         id: '31',
-                        text: 'LR1项集图',
+                        text: 'LR1项集图<span color="red">(慎点)</span>',
                         icon: 'icon-glass',
                         url: '/SyntaxItems.html'
                     }, {
@@ -140,7 +145,7 @@
                         id: '35',
                         text: '中间代码',
                         icon: 'icon-glass',
-                        url: '/SimpleJavaProgram.txt'
+                        url: '/SimpleJavaTargetCode.txt'
                     }]
                 }]
             });
