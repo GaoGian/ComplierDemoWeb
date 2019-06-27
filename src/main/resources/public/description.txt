@@ -1,9 +1,11 @@
-CompilerDemo
-《编译原理》（机械工业出版社）--编译器
+简介：
+    此项目是工作之余学习《编译原理》不经手痒的成果，词法、文法参考的ANTLR，使用LR1解析方法，具有通用的语法解析功能；
 
 
-GitHub : https://github.com/GaoGian/DragonCompilerDemo
+GitHub项目地址 : https://github.com/GaoGian/DragonCompilerDemo
 
+
+以下部分是主要功能描述：
 
 编译器前端
     主要功能
