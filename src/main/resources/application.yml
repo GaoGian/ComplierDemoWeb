@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: compiler
+    name: compiler_web
   thymeleaf:
     prefix: classpath:/templates/
   http:
